@@ -17,30 +17,90 @@
       p.style.fontSize = '50px';
     }
 
+    // Various ways to have things show up in the console:
+
+
     // Regular
+    console.log('hello')
 
     // Interpolated
+    // (not used as much, now that we can use ES6 backticks)
+    console.log('hello I am a %s string', '💛')
 
     // Styled
+    console.log('%c I am some text', 'font-size: 14px; color: red; background-color: navy')
 
     // warning!
+    // will allow you to display warning text
+    console.warn('oh no!')
 
     // Error :|
+    // will allow you to display error text 
+    console.error('oh no!')
 
     // Info
+    // will have a little 'i' beside the text
+    console.info('crocodiles eat 3 to 4 people a year')
 
     // Testing
+    console.assert(1 === 1, 'that is wrong!') //nothing will show because this is true
+    console.assert(1 === 2, 'that is wrong!') //will show "Assertion failed: that is wrong!"
+    
+    const p = document.querySelector('p');
+    console.assert(p.classList.contains('ouch'), 'That is wrong') //will show: "Assertion failed: That is wrong" because p doesn't have a class of "ouch"
+    // allows you to test for something
 
     // clearing
+    console.clear() //will clear the console
 
     // Viewing DOM Elements
+    console.log(p);//will show the element
+    console.dir(p);//will show the element and provide a dropdown of all its different properties
 
     // Grouping together
+    dogs.forEach(dog => {
+
+      console.group(`${dog.name}`)
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} years old.`);
+      console.log(`${dog.name} is ${dog.age * 7} dog years.`);
+      console.groupEnd(`${dog.name}`)
+      // by bookending the various consoles with "group" and "groupEnd", it will hold each dog's info in its own group
+      
+      // further, you can have "groupCollapsed" at the front which will collapse the group but have it available in the dropdown
+      console.groupCollapsed(`${dog.name}`)
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} years old.`);
+      console.log(`${dog.name} is ${dog.age * 7} dog years.`);
+      console.groupEnd(`${dog.name}`)
+    })
 
     // counting
+    console.count('wes') //will count how many times you use a specific element, or object, or node
+    console.count('wes') 
+    console.count('wes') 
+    console.count('wes') 
+    console.count('wes') 
+    console.count('wes') 
+    console.count('wes') 
+    // will show "wes:__" with the number of how many times "wes" is there ie. "wes: 7" at the end
 
     // timing
+    console.time('fetching data'); //will tell you how long something took
+    fetch('https://api.github.com/users/wesbos')
+      .then(data => data.json())
+      .then(data => {
+        console.timeEnd('fetching data');
+        console.log(data);
+      });
+    
+    // will show "fetching data: 730.945068359375 ms" at the end, meaning that it took 730.945... miliseconds to fetch that data
 
+
+    // table
+    console.table(dogs);
+      //allows you to take an array of objects and put them in a table
+  
   </script>
 </body>
 </html>
